@@ -1,0 +1,13 @@
+# Dir
+SampleTool/SampleTool/bin/
+SampleTool/SampleTool/obj/
+
+# File
+*.bak
+*.db
+*.suo
+*.dll
+*.pdb
+*.ide
+*.ide-shm
+*.ide-wal
