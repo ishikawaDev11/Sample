@@ -1,0 +1,14 @@
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\bin\Debug\UiControlByLinq.exe.config
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\bin\Debug\UiControlByLinq.exe
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\bin\Debug\UiControlByLinq.pdb
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\MainWindow.g.cs
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\App.g.cs
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq_MarkupCompile.cache
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq_MarkupCompile.lref
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\MainWindow.baml
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq.g.resources
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq.exe
+C:\Users\User\Documents\GitHub\Sample\UiControlByLinq\UiControlByLinq\obj\Debug\UiControlByLinq.pdb
