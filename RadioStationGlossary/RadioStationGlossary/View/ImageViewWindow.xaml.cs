@@ -26,6 +26,11 @@ namespace RadioStationGlossary.View
 
             BitmapImage bmp = ClsBitmap.GetBitmapImage(filePath);
             imageDisplayData.Source = bmp;
+
+            imageDisplayData.MouseRightButtonDown += (sender, e) =>
+            {
+                this.Close();
+            };
         }
     }
 }

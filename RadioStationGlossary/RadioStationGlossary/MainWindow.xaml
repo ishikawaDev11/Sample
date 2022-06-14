@@ -13,7 +13,7 @@
             <RowDefinition/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch">
+        <TabControl x:Name="tabCtlDataase" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch">
             <TabItem Header="{Binding item001, Mode=OneWay, Source={StaticResource Resources}}">
                 <Grid >
                     <StackPanel Background="#FF333333" Orientation="Vertical" >

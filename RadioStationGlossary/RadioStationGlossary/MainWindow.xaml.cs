@@ -105,6 +105,7 @@ namespace RadioStationGlossary
                      imageDisplayData.Visibility = Visibility.Hidden;
              };
 
+            // 画像クリック時の処理
             imageDisplayData.MouseLeftButtonDown += (sender, e) =>
             {
                 if (lstGlossary.SelectedIndex < 0)
@@ -120,6 +121,35 @@ namespace RadioStationGlossary
                     ImageViewWindow ivw = new ImageViewWindow(filePath);
                     ivw.Show();
                 }
+            };
+
+            // リスト選択時の編集ボタンクリック
+            btnEdit.Click += (sender, e) =>
+            {
+                DataRowView dataRow = (DataRowView)lstGlossary.SelectedItem;
+                if (dataRow == null)
+                    return;
+
+                tabCtlDataase.SelectedIndex = 1;
+
+                tbxInputName.Text = dataRow.Row.ItemArray[0].ToString();
+                tbxInputDiscription.Text = dataRow.Row.ItemArray[1].ToString();
+                var tmp = dataRow.Row.ItemArray[2];
+                if (null != tmp)
+                    tbxInputRemarks.Text = tmp.ToString();
+                
+                string filePath = dataRow.Row.ItemArray[3].ToString();
+                if (!String.IsNullOrWhiteSpace(filePath))
+                {
+                    // 相対パスから絶対パスに変換
+                    string exePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    tbxImageFile.Text = exePath + @"\" + filePath;
+                    ImageRegistView(filePath);
+                    imageRegistData.Visibility = Visibility.Visible;
+                }
+                else
+                    imageRegistData.Visibility = Visibility.Hidden;
+
             };
         }
 
