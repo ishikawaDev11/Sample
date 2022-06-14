@@ -1,6 +1,6 @@
 # Dir
-SampleTool/SampleTool/bin/
-SampleTool/SampleTool/obj/
+RadioStationGlossary/RadioStationGlossary/bin/
+RadioStationGlossary/RadioStationGlossary/obj/
 
 # File
 *.bak
@@ -11,3 +11,4 @@ SampleTool/SampleTool/obj/
 *.ide
 *.ide-shm
 *.ide-wal
+*.lock

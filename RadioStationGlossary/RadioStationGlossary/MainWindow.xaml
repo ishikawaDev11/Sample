@@ -1,0 +1,125 @@
+﻿<Window x:Class="RadioStationGlossary.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RadioStationGlossary"
+        mc:Ignorable="d" ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding item000, Mode=OneWay, Source={StaticResource Resources}}" Height="600" Width="960">
+    <Grid Background="#FF777777">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch">
+            <TabItem Header="{Binding item001, Mode=OneWay, Source={StaticResource Resources}}">
+                <Grid >
+                    <StackPanel Background="#FF333333" Orientation="Vertical" >
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding item101, Mode=OneWay, Source={StaticResource Resources}}" Foreground="White" Height="25" />
+                            <TextBox x:Name="tbxSearch" Margin="10,5"  Width="120" Height="25" />
+                            <Button x:Name="btnSearch" Content="{Binding item102, Mode=OneWay, Source={StaticResource Resources}}" Width="120" Height="24" Style="{DynamicResource buttonStyle}" />
+                            <RadioButton x:Name="rbtnSearchOrderUp" Content="{Binding item103, Mode=OneWay, Source={StaticResource Resources}}" 
+                                         Margin="50,8,0,0"
+                                         Foreground="White"
+                                         IsChecked="True"
+                                         Height="24"  />
+                            <RadioButton x:Name="rbtnSearchOrderDown" Content="{Binding item104, Mode=OneWay, Source={StaticResource Resources}}" 
+                                         Margin="10,8,0,0"                                         
+                                         Foreground="White"
+                                         Height="24"  />
+                            <Button x:Name="btnEdit" Content="{Binding item105, Mode=OneWay, Source={StaticResource Resources}}" 
+                                    Margin="240,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    Width="140" Height="24" 
+                                    Style="{DynamicResource buttonStyle}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ListView x:Name="lstGlossary"  Background="Beige" VerticalContentAlignment="Top" Height="470" HorizontalAlignment="Left"
+                                      SelectionMode="Single"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                    ItemsSource="{Binding}" FontFamily="Meiryo UI" >
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="False" >
+                                        <GridViewColumn x:Name="colName" Header="{Binding item003, Mode=OneWay, Source={StaticResource Resources}}" DisplayMemberBinding="{Binding Path=Name}" Width="120"/>
+                                        <GridViewColumn x:Name="colDiscription" Header="{Binding item004, Mode=OneWay, Source={StaticResource Resources}}" DisplayMemberBinding="{Binding Path=Discription}" Width="400" />
+                                        <GridViewColumn x:Name="colRemarks" Header="{Binding item005, Mode=OneWay, Source={StaticResource Resources}}" DisplayMemberBinding="{Binding Path=Remarks}" Width="60" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <StackPanel  Orientation="Vertical" >
+                                <TextBlock x:Name="tbkDiscription" 
+                                           Margin="5,0,0,0"
+                                           Width="310"
+                                           HorizontalAlignment="Left"
+                                           ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                                           VerticalAlignment="Top"
+                                           TextWrapping="Wrap"
+                                           Foreground="White" >
+                                </TextBlock>
+                                <Image x:Name="imageDisplayData" Margin="10,5" Height="240" Width="300"  />
+                                <!--<Image x:Name="imageDisplayData" Source="Resources/Exit.png" Margin="10,5" Height="160" Width="300" />-->
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{Binding item002, Mode=OneWay, Source={StaticResource Resources}}">
+                <StackPanel Background="#FF333333">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding item003, Mode=OneWay, Source={StaticResource Resources}}" 
+                               Foreground="White" Width="80" Height="25" HorizontalAlignment="Right" />
+                        <TextBox x:Name="tbxInputName" Margin="10,5"  Width="320" Height="25" TabIndex="0" />
+                        <Button x:Name="btnWdClear" Margin="20,5" HorizontalAlignment="Left" 
+                                Content="{Binding item202, Mode=OneWay, Source={StaticResource Resources}}" 
+                                Width="80" Height="24" 
+                                Style="{DynamicResource buttonStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="0,5" VerticalAlignment="Top" 
+                               Content="{Binding item004, Mode=OneWay, Source={StaticResource Resources}}" 
+                               Foreground="White" Width="80" Height="25" />
+                        <TextBox x:Name="tbxInputDiscription" Text="" Margin="10,5"  
+                                 Width="320" Height="240" MaxLength="512" 
+                                 TextWrapping="Wrap" UndoLimit="300" TabIndex="1"/>
+                        <Image x:Name="imageRegistData" Margin="10,5" Height="240" Width="300" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding item006, Mode=OneWay, Source={StaticResource Resources}}" Foreground="White" Width="80" Height="25" />
+                        <TextBox x:Name="tbxImageFile" Margin="10,5"  Width="320" Height="25" TabIndex="2" ToolTip="ファイルをマウスでDrag&amp;Dropしてください"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding item005, Mode=OneWay, Source={StaticResource Resources}}" Foreground="White" Width="80" Height="25" />
+                        <TextBox x:Name="tbxInputRemarks" Margin="10,5"  Width="320" Height="25" TabIndex="3"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Button x:Name="btnWrite" Margin="90,0" HorizontalAlignment="Left" 
+                                    Content="{Binding item201, Mode=OneWay, Source={StaticResource Resources}}" 
+                                    Width="120" Height="24" 
+                                    TabIndex="4"
+                                    Style="{DynamicResource buttonStyle}" />
+                            <Button x:Name="btnDelete" Margin="220,0" HorizontalAlignment="Left" 
+                                    Content="{Binding item204, Mode=OneWay, Source={StaticResource Resources}}" 
+                                    Width="120" Height="24" 
+                                    Style="{DynamicResource buttonStyle}" />
+
+                            <!--
+                            <Button x:Name="btnRdSet" Margin="220,0" HorizontalAlignment="Left" 
+                                    Content="{Binding item203, Mode=OneWay, Source={StaticResource Resources}}" 
+                                    Width="120" Height="24" 
+                                    Style="{DynamicResource buttonStyle}" />
+                            -->
+                        </Grid>
+                        <TextBlock x:Name="tbkResult" Background="Beige"  HorizontalAlignment="Left" VerticalAlignment="Top"  
+                                   Margin="90,5"
+                                   Width="320" Height="100" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
