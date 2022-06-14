@@ -145,7 +145,7 @@ namespace RadioStationGlossary
 
 #endregion
 
-#region TabRegist
+        #region TabRegist
         private void SetEventForRegist()
         {
             // 検索ボタンイベント定義
@@ -269,13 +269,16 @@ namespace RadioStationGlossary
             gl = dbase.ReadDb1(keyname);
             if (gl != null)
             {
-                tbxInputName.Text = gl.Name;
-                tbxInputDiscription.Text = gl.Discription;
-                tbxInputRemarks.Text = gl.Remarks;
-                tbxImageFile.Text = gl.ImageData;
-                if(!String.IsNullOrWhiteSpace(gl.ImageData))
+                if (gl.Id > 0)
                 {
-                    ImageRegistView(gl.ImageData);
+                    tbxInputName.Text = gl.Name;
+                    tbxInputDiscription.Text = gl.Discription;
+                    tbxInputRemarks.Text = gl.Remarks;
+                    tbxImageFile.Text = gl.ImageData;
+                    if (!String.IsNullOrWhiteSpace(gl.ImageData))
+                    {
+                        ImageRegistView(gl.ImageData);
+                    }
                 }
             }
             return gl;
