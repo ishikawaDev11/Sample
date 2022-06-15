@@ -31,6 +31,7 @@
                                          Foreground="White"
                                          Height="24"  />
                             <Button x:Name="btnEdit" Content="{Binding item105, Mode=OneWay, Source={StaticResource Resources}}" 
+                                    IsEnabled="False"
                                     Margin="240,0,0,0"
                                     HorizontalAlignment="Left"
                                     Width="140" Height="24" 

@@ -88,8 +88,12 @@ namespace RadioStationGlossary
                  var source = e.Source;
                  DataRowView dataRow = (DataRowView)lstGlossary.SelectedItem;
                  if (dataRow == null)
-                    return;
+                 {
+                     btnEdit.IsEnabled = false;
+                     return;
+                 }
 
+                 btnEdit.IsEnabled = true;
                  string disp = dataRow.Row.ItemArray[1].ToString();
                  tbkDiscription.Text = disp;
 

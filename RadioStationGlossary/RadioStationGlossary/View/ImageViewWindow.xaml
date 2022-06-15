@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         Title="{Binding item006, Mode=OneWay, Source={StaticResource Resources}}"
         Height="650" Width="650">
-    <Grid>
+    <Grid Background="#FF333333">
         <Image x:Name="imageDisplayData" Margin="5"  />
     </Grid>
 </Window>
