@@ -15,6 +15,7 @@ namespace RadioStationGlossary.Models
         public void Initialize()
         {
             glTable = new DataTable();
+            glTable.Columns.Add("Id", typeof(int));
             glTable.Columns.Add("Name", typeof(string));
             glTable.Columns.Add("Discription", typeof(string));
             glTable.Columns.Add("Remarks", typeof(string));
@@ -54,6 +55,7 @@ namespace RadioStationGlossary.Models
             try
             {
                 DataRow row = glTable.NewRow();
+                row["Id"] = data.Id;
                 row["Name"] = data.Name;
                 row["Discription"] = data.Discription;
                 row["Remarks"] = data.Remarks;

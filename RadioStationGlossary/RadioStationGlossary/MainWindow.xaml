@@ -30,9 +30,13 @@
                                          Margin="10,8,0,0"                                         
                                          Foreground="White"
                                          Height="24"  />
+                            <ComboBox x:Name="cbxDatabase" Margin="50,0,0,0" Width="110" Height="20" >
+                                <ComboBoxItem>4G/5G関連</ComboBoxItem>
+                                <ComboBoxItem>AWS関連</ComboBoxItem>
+                            </ComboBox>
                             <Button x:Name="btnEdit" Content="{Binding item105, Mode=OneWay, Source={StaticResource Resources}}" 
                                     IsEnabled="False"
-                                    Margin="240,0,0,0"
+                                    Margin="80,0,0,0"
                                     HorizontalAlignment="Left"
                                     Width="140" Height="24" 
                                     Style="{DynamicResource buttonStyle}" />

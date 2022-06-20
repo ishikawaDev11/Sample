@@ -32,6 +32,7 @@ namespace RadioStationGlossary
             InitializeComponent();
 
             // データ初期化
+            cbxDatabase.SelectedIndex = 0;
             InitializeData();
 
             #region TabSearch
@@ -45,7 +46,7 @@ namespace RadioStationGlossary
             #endregion
         }
 
-        private void InitializeData()
+        private void InitializeData(int idx=0)
         {
             // 表示用データの初期化
             dtbl = new ClsDatatable();                 // 表示用DataTableインスタンス化
@@ -54,6 +55,7 @@ namespace RadioStationGlossary
 
             // データベースの初期化
             dbase = new ClsDatabase();
+            dbase.Initialize(idx);
         }
 
         #region TabSearch
@@ -94,12 +96,12 @@ namespace RadioStationGlossary
                  }
 
                  btnEdit.IsEnabled = true;
-                 string disp = dataRow.Row.ItemArray[1].ToString();
+                 string disp = dataRow.Row.ItemArray[2].ToString();
                  tbkDiscription.Text = disp;
 
                 // 画像表示
                  var count = dataRow.Row.ItemArray.Count();
-                 string filePath = dataRow.Row.ItemArray[3].ToString();
+                 string filePath = dataRow.Row.ItemArray[4].ToString();
                  if (!String.IsNullOrWhiteSpace(filePath))
                  {
                      ImageSearchView(filePath);
@@ -119,7 +121,7 @@ namespace RadioStationGlossary
                 if (dataRow == null)
                     return;
 
-                string filePath = dataRow.Row.ItemArray[3].ToString();
+                string filePath = dataRow.Row.ItemArray[4].ToString();
                 if (!String.IsNullOrWhiteSpace(filePath))
                 {
                     ImageViewWindow ivw = new ImageViewWindow(filePath);
@@ -135,24 +137,32 @@ namespace RadioStationGlossary
                     return;
 
                 tabCtlDataase.SelectedIndex = 1;
+                tbxInputName.Text = dataRow.Row.ItemArray[1].ToString();
+                Glos gls = Search1Event();
+                string filePath = gls.ImageData;
 
-                tbxInputName.Text = dataRow.Row.ItemArray[0].ToString();
-                tbxInputDiscription.Text = dataRow.Row.ItemArray[1].ToString();
-                var tmp = dataRow.Row.ItemArray[2];
-                if (null != tmp)
-                    tbxInputRemarks.Text = tmp.ToString();
-                
-                string filePath = dataRow.Row.ItemArray[3].ToString();
+                //tbxInputName.Text = dataRow.Row.ItemArray[1].ToString();
+                //tbxInputDiscription.Text = dataRow.Row.ItemArray[2].ToString();
+                //var tmp = dataRow.Row.ItemArray[3];
+                //if (null != tmp)
+                //    tbxInputRemarks.Text = tmp.ToString();
+                //
+                //string filePath = dataRow.Row.ItemArray[4].ToString();
                 if (!String.IsNullOrWhiteSpace(filePath))
                 {
                     // 相対パスから絶対パスに変換
                     string exePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                     tbxImageFile.Text = exePath + @"\" + filePath;
-                    ImageRegistView(filePath);
-                    imageRegistData.Visibility = Visibility.Visible;
+                    //ImageRegistView(filePath);
+                    //imageRegistData.Visibility = Visibility.Visible;
                 }
-                else
-                    imageRegistData.Visibility = Visibility.Hidden;
+                //else
+                //    imageRegistData.Visibility = Visibility.Hidden;
+
+            };
+
+            cbxDatabase.SelectionChanged += (sender, e) =>
+            {
 
             };
         }
@@ -348,7 +358,7 @@ namespace RadioStationGlossary
             tbkResult.Text = "";
         }
 
-#endregion
+        #endregion
 
     }
 
