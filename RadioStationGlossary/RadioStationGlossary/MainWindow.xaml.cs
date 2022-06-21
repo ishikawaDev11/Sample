@@ -25,7 +25,7 @@ namespace RadioStationGlossary
     public partial class MainWindow : Window
     {
         ClsDatatable dtbl;
-        ClsDatabase dbase;
+        ClsDatabase dbase = null;
 
         public MainWindow()
         {
@@ -44,6 +44,12 @@ namespace RadioStationGlossary
             // 更新タブのイベント設定
             SetEventForRegist();
             #endregion
+
+            this.Closed += (sender, e) =>
+            {
+                if (dbase != null)
+                    dbase.Dispose();
+            };
         }
 
         private void InitializeData(int idx=0)
