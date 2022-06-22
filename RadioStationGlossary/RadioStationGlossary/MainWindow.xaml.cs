@@ -183,7 +183,12 @@ namespace RadioStationGlossary
         {
             // Databaseの読込み
             string strSearch = tbxSearch.Text;
-            var results = dbase.ReadDb(strSearch);
+            var results = dbase.ReadDb(strSearch, out string emsg);
+            if (results == null)
+            {
+                tbkDiscription.Text = emsg;
+                return;
+            }
 
             // Datatableへの展開
             dtbl.Load(results);
@@ -316,7 +321,7 @@ namespace RadioStationGlossary
 
             ClearInfoData();
             ClearResultData();
-            gl = dbase.ReadDb1(keyname);
+            gl = dbase.ReadDb1(keyname, out string emsg);
             if (gl != null)
             {
                 if (gl.Id > 0)
@@ -330,6 +335,10 @@ namespace RadioStationGlossary
                         ImageRegistView(gl.ImageData);
                     }
                 }
+            }
+            else
+            {
+                tbkResult.Text = emsg;
             }
             return gl;
         }

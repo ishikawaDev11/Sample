@@ -151,7 +151,7 @@ namespace RadioStationGlossary.Models
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("画像削除失敗");
+                            Console.WriteLine("画像削除失敗：" + ex.Message);
                         }
                     }
 
@@ -172,54 +172,70 @@ namespace RadioStationGlossary.Models
             return retsts;
         }
 
-        public IEnumerable<Glos> ReadDb(string strSearch)
+        public IEnumerable<Glos> ReadDb(string strSearch, out string msg)
         {
-
-            // DB接続
-            if (_context == null)
-                _context = new LiteDatabase(_database);
-            var db = _context.GetCollection<Glos>(_dbname);
+            msg = "";
             IEnumerable<Glos> gls = null;
 
-            if (strSearch == "")
+            try
             {
-                if (_order < 0)     // マイナスなので降順
-                    gls = db.FindAll().OrderByDescending(xx => xx.Name);
-                else                // 0以上なので昇順
-                    gls = db.FindAll().OrderBy(xx => xx.Name);
-                 
-                var cnt = gls.Count();
-            }
-            else
-            {
-                if (_order < 0)
-                    gls = db.Find(x => x.Name.StartsWith(strSearch)).OrderByDescending(x => x.Name);
+                // DB接続
+                if (_context == null)
+                    _context = new LiteDatabase(_database);
+                var db = _context.GetCollection<Glos>(_dbname);
+
+                if (strSearch == "")
+                {
+                    if (_order < 0)     // マイナスなので降順
+                        gls = db.FindAll().OrderByDescending(xx => xx.Name);
+                    else                // 0以上なので昇順
+                        gls = db.FindAll().OrderBy(xx => xx.Name);
+
+                    var cnt = gls.Count();
+                }
                 else
-                    gls = db.Find(x => x.Name.StartsWith(strSearch)).OrderBy(x => x.Name);
+                {
+                    if (_order < 0)
+                        gls = db.Find(x => x.Name.StartsWith(strSearch)).OrderByDescending(x => x.Name);
+                    else
+                        gls = db.Find(x => x.Name.StartsWith(strSearch)).OrderBy(x => x.Name);
+                }
+            }
+            catch(Exception ex)
+            {
+                msg = $"■Databaseの読み込みに失敗しました\r\n" + ex.Message;
             }
             return gls;
         }
 
-        public Glos ReadDb1(string strSearch)
+        public Glos ReadDb1(string strSearch, out string msg)
         {
-           
-            // DB接続
-            if (_context == null)
-                _context = new LiteDatabase(_database);
-            var db = _context.GetCollection<Glos>(_dbname);
+            msg = "";
             IEnumerable<Glos> gls = null;
 
-            if (strSearch != "")
+            try
             {
-                if (db.Count(x => x.Name == strSearch) > 0)
+                // DB接続
+                if (_context == null)
+                    _context = new LiteDatabase(_database);
+                var db = _context.GetCollection<Glos>(_dbname);
+
+                if (strSearch != "")
                 {
-                    gls = db.Find(x => x.Name == strSearch);
-                    _glos = gls.First();
+                    if (db.Count(x => x.Name == strSearch) > 0)
+                    {
+                        gls = db.Find(x => x.Name == strSearch);
+                        _glos = gls.First();
+                    }
+                    else
+                    {
+                        ClearGros();
+                    }
                 }
-                else
-                {
-                    ClearGros();
-                }
+            }
+            catch(Exception ex)
+            {
+                msg = $"■Databaseの読み込みに失敗しました\r\n" + ex.Message;
             }
             return _glos;
         }
