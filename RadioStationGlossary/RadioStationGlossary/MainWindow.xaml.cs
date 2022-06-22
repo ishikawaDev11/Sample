@@ -162,8 +162,8 @@ namespace RadioStationGlossary
                     //ImageRegistView(filePath);
                     //imageRegistData.Visibility = Visibility.Visible;
                 }
-                //else
-                //    imageRegistData.Visibility = Visibility.Hidden;
+                else
+                    imageRegistData.Visibility = Visibility.Hidden;
 
             };
 
