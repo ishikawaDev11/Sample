@@ -42,7 +42,8 @@
                                     Style="{DynamicResource buttonStyle}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ListView x:Name="lstGlossary"  Background="Beige" VerticalContentAlignment="Top" Height="470" HorizontalAlignment="Left"
+                            <ListView x:Name="lstGlossary"  Background="Beige" VerticalContentAlignment="Top" Height="470"
+                                      HorizontalAlignment="Left" Width="610"
                                       SelectionMode="Single"
                                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                       ScrollViewer.VerticalScrollBarVisibility="Auto"

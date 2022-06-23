@@ -24,7 +24,7 @@ namespace RadioStationGlossary
     /// </summary>
     public partial class MainWindow : Window
     {
-        ClsDatatable dtbl;
+        ClsDatatable dtbl = null;
         ClsDatabase dbase = null;
 
         public MainWindow()
@@ -58,10 +58,33 @@ namespace RadioStationGlossary
             dtbl = new ClsDatatable();                 // 表示用DataTableインスタンス化
             dtbl.Initialize();                         // 初期化(DataTable)
             lstGlossary.DataContext = dtbl.glTable;    // GridView に関連付け
+            dbase = new ClsDatabase();                 // Databaseインスタンス化
+            dbase.Initialize(idx);
+
+            //if (dtbl != null)
+            //{
+            //    dtbl.Clear();
+            //}
+            //else
+            //{
+            //    dtbl = new ClsDatatable();                 // 表示用DataTableインスタンス化
+            //    dtbl.Initialize();                         // 初期化(DataTable)
+            //    lstGlossary.DataContext = dtbl.glTable;    // GridView に関連付け
+            //}
 
             // データベースの初期化
-            dbase = new ClsDatabase();
-            dbase.Initialize(idx);
+            //if (dbase != null)
+            //{
+            //    dbase.Dispose();
+            //}
+            //dbase = new ClsDatabase();
+            //dbase.Initialize(idx);
+        }
+
+        private void ChangeData(int idx)
+        {
+            dtbl?.Clear();
+            dbase?.Initialize(idx);
         }
 
         #region TabSearch
@@ -169,7 +192,8 @@ namespace RadioStationGlossary
 
             cbxDatabase.SelectionChanged += (sender, e) =>
             {
-
+                int idx = cbxDatabase.SelectedIndex;
+                ChangeData(idx);
             };
         }
 

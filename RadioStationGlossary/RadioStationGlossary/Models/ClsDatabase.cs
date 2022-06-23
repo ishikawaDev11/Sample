@@ -10,9 +10,13 @@ namespace RadioStationGlossary.Models
 {
     public class ClsDatabase : IDisposable
     {
-        private LiteDatabase _context = null;
-        private string _database = "./data.db";
-        private string _dbname = "glossary";
+        //private LiteDatabase _context = null;
+        //private string _database = "./data.db";
+        //private string _dbname = "glossary";
+        private int _idx = 0;
+        private LiteDatabase[] _contexts = { null, null };
+        private string[] _databases = { "./data.db", "./awsData.db" };
+        private string[] _dbnames = { "glossary", "awscontents" };
         private Glos _glos = new Glos();
         private int _order = 0;     // 0:default=昇順
                                     // -1：降順
@@ -25,7 +29,14 @@ namespace RadioStationGlossary.Models
 
         public void Initialize(int idx)
         {
-
+            //if (_context != null)
+            //{
+            //    _context.Dispose();
+            //    _context = null;
+            //}
+            _idx = idx;
+            //_database = _databases[_idx];
+            //_dbname = _dbnames[_idx];
         }
 
         public bool WriteDb(Glos glos, out string msg)
@@ -41,11 +52,11 @@ namespace RadioStationGlossary.Models
             try
             {
                 // DB接続
-                if (_context == null)
-                    _context = new LiteDatabase(_database);
+                if (_contexts[_idx] == null)
+                    _contexts[_idx] = new LiteDatabase(_databases[_idx]);
 
                 // コレクション取得
-                var db = _context.GetCollection<Glos>(_dbname);
+                var db = _contexts[_idx].GetCollection<Glos>(_dbnames[_idx]);
 
                 // 画像データのファイル整形
                 if (_glos.ImageData != "")
@@ -134,11 +145,11 @@ namespace RadioStationGlossary.Models
                 try
                 {
                     // DB接続
-                    if (_context == null)
-                        _context = new LiteDatabase(_database);
+                    if (_contexts[_idx] == null)
+                        _contexts[_idx] = new LiteDatabase(_databases[_idx]);
 
                     // コレクション取得
-                    var db = _context.GetCollection<Glos>(_dbname);
+                    var db = _contexts[_idx].GetCollection<Glos>(_dbnames[_idx]);
 
                     // 削除
                     db.Delete(glos.Id);
@@ -180,9 +191,9 @@ namespace RadioStationGlossary.Models
             try
             {
                 // DB接続
-                if (_context == null)
-                    _context = new LiteDatabase(_database);
-                var db = _context.GetCollection<Glos>(_dbname);
+                if (_contexts[_idx] == null)
+                    _contexts[_idx] = new LiteDatabase(_databases[_idx]);
+                var db = _contexts[_idx].GetCollection<Glos>(_dbnames[_idx]);
 
                 if (strSearch == "")
                 {
@@ -216,9 +227,9 @@ namespace RadioStationGlossary.Models
             try
             {
                 // DB接続
-                if (_context == null)
-                    _context = new LiteDatabase(_database);
-                var db = _context.GetCollection<Glos>(_dbname);
+                if (_contexts[_idx] == null)
+                    _contexts[_idx] = new LiteDatabase(_databases[_idx]);
+                var db = _contexts[_idx].GetCollection<Glos>(_dbnames[_idx]);
 
                 if (strSearch != "")
                 {
@@ -258,12 +269,24 @@ namespace RadioStationGlossary.Models
             {
                 if (disposing)
                 {
-                    // TODO: マネージド状態を破棄します (マネージド オブジェクト)。
+                    try
+                    {
+                        // TODO: マネージド状態を破棄します (マネージド オブジェクト)。
+                        for (int id = 0; id < _contexts.Length; id++)
+                        {
+                            _contexts[id]?.Commit();
+                            _contexts[id]?.Dispose();
+                            _contexts[id] = null;
+                        }
+                    }
+                    catch (UnauthorizedAccessException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
 
                 // TODO: アンマネージド リソース (アンマネージド オブジェクト) を解放し、下のファイナライザーをオーバーライドします。
                 // TODO: 大きなフィールドを null に設定します。
-
                 disposedValue = true;
             }
         }
